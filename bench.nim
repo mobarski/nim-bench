@@ -69,14 +69,14 @@ proc report(self: Bench, skip=0) =
 
 # === TESTS ===
 
+import std/os
+
 proc test1() =
     var b = new_bench("test benchmark")
-    for i in 1..100:
-        let x = @[1,2,3]
+    for i in 1..1000:
+        sleep(1)
         b.done
-    #b.done(3)
-    #echo b
-    b.report(skip=10)
+    b.report
 
 if is_main_module:
     test1()
