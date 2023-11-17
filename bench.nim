@@ -55,7 +55,6 @@ proc report*(self: Bench, skip=0) =
     let max_us : float64 = run_duration.max / 1000
     let avg_items : float64 = self.items.sum.float64 / runs.float64
     # === PRINT ===
-    echo ""
     echo self.label, ":"
     if runs==1:
         echo "  Time: {format_us(avg_us)}".fmt
@@ -65,7 +64,6 @@ proc report*(self: Bench, skip=0) =
         echo "  Time (min … max):   {format_us(min_us)} … {format_us(max_us)}".fmt
         echo "  Rate (avg ± stdev): {format_ops(avg_us, avg_items)}".fmt
     echo "  Runs: {runs}".fmt
-    echo ""
 
 # === TESTS ===
 
