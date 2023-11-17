@@ -30,11 +30,11 @@ proc new_bench*(label=""): Bench =
     result.label = label
     result.times.add(get_mono_time())
 
-proc done(self: var Bench, items=1) =
+proc done*(self: var Bench, items=1) =
     self.times.add(get_mono_time())
     self.items.add(items)
 
-proc report(self: Bench, skip=0) =
+proc report*(self: Bench, skip=0) =
     # === CALCULATE ===
     let runs = self.times.len - 1 - skip
     var run_duration: seq[int64]
