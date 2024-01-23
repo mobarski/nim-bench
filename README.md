@@ -8,20 +8,20 @@ Simple benchmarking module for Nim.
 import bench
 import std/os
 
-var b = new_bench("test benchmark")
+var b = new_bench("Test benchmark")
 for i in 1..1000:
     sleep(1)
     b.done
-b.report
+b.report(item="run")
 ```
 
 **output:**
 
 ```
-test benchmark:
-  Time (avg ± stdev): 1.1 ms ± 0.2 µs
-  Time (min … max):   1.0 ms … 1.3 ms
-  Rate (avg ± stdev): 0.9K items/s
+Test benchmark:
+  Time (avg ± stdev): 1.11 ms ± 0.14 µs
+  Time (min … max):   1.05 ms … 1.18 ms
+  Rate (avg): 899 runs/s
   Runs: 1000
 ```
 
@@ -39,7 +39,7 @@ test benchmark:
 
 #### new_bench
 
-`new_bench(label=""): Bench`
+`new_bench(label="Benchmark"): Bench`
 
 Create new benchmark object with a given label.
 
@@ -55,7 +55,7 @@ Register successful run, which processed some items.
 
 #### report
 
-`report(self: Bench, skip=0)`
+`report(self: Bench, item="item", skip=0)`
 
 Print the statistics. You can skip some initial runs.
 
