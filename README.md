@@ -12,7 +12,7 @@ var b = new_bench("Test benchmark")
 for i in 1..1000:
     sleep(1)
     b.done
-b.report(item="run")
+b.show(item="run")
 ```
 
 **output:**
@@ -53,11 +53,11 @@ Register successful run, which processed some items.
 
 
 
-#### report
+#### show
 
-`report(self: Bench, item="item", skip=0)`
+`show(self: Bench, item="item", skip=0)`
 
-Print the statistics. You can skip some initial runs.
+Show statistics. You can skip some initial runs and define the item label.
 
 
 

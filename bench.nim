@@ -25,10 +25,14 @@ proc format_ops(us, n:float64, item_label="item"): string =
         result = "{ops/1000:0.2f}K {item_label}s/s".fmt
     elif ops < 100*1000:
         result = "{ops/1000:0.1f}K {item_label}s/s".fmt
+    elif ops < 1000*1000:
+        result = "{int(ops/1000):d}K {item_label}s/s".fmt
     elif ops < 10*1000*1000:
         result = "{ops/1000/1000:0.2f}M {item_label}s/s".fmt
     elif ops < 100*1000*1000:
         result = "{ops/1000/1000:0.1f}M {item_label}s/s".fmt
+    elif ops < 1000*1000*1000:
+        result = "{int(ops/1000/1000):d}M {item_label}s/s".fmt
     else:
         result = "{ops/1000/1000/1000:0.2f}G {item_label}s/s".fmt
 
@@ -48,7 +52,7 @@ proc done*(self: var Bench, items=1) =
     self.times.add(get_mono_time())
     self.items.add(items)
 
-proc report*(self: Bench, item="item", skip=0) =
+proc show*(self: Bench, item="item", skip=0) =
     # === CALCULATE ===
     let runs = self.times.len - 1 - skip
     var run_duration: seq[int64]
@@ -87,8 +91,8 @@ proc test1() =
     var b = new_bench("Test benchmark")
     for i in 1..1000:
         sleep(1)
-        b.done
-    b.report(item="run")
+        b.done(10000000)
+    b.show(item="run")
 
 if is_main_module:
     test1()
