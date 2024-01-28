@@ -1,5 +1,6 @@
 import std/monotimes
 import std/strformat
+import std/strutils
 import std/math
 
 proc format_us(us:float64): string =
@@ -81,6 +82,8 @@ proc show*(self: Bench, item="item", skip=0) =
         output "  Time (avg ± stdev): {format_us(avg_us)} ± {format_us(dev_us)}".fmt
         output "  Time (min … max):   {format_us(min_us)} … {format_us(max_us)}".fmt
         output "  Rate (avg): {format_ops(avg_us, avg_items, item_label=item)}".fmt
+        output "  Total time: {format_us(avg_us*runs.float64)}".fmt
+    output "  {item.capitalize_ascii}s: {self.items.sum}".fmt
     output "  Runs: {runs}".fmt
 
 # === TESTS ===
@@ -92,7 +95,7 @@ proc test1() =
     for i in 1..1000:
         sleep(1)
         b.done(10000000)
-    b.show(item="run")
+    b.show(item="number")
 
 if is_main_module:
     test1()
